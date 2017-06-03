@@ -1,4 +1,4 @@
-const React = require('react');
+import React from 'react';
 
 class OutputArea extends React.Component {
   render() {
@@ -8,5 +8,4 @@ class OutputArea extends React.Component {
     )
   }
 }
-
-module.exports = OutputArea;
+export default OutputArea;
