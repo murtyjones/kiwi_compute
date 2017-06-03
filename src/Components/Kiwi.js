@@ -1,6 +1,6 @@
-const React = require('react');
-const Header = require('./Header');
-const SkulptIO = require('./SkulptIO');
+import React from 'react';
+import Header from './Header';
+import SkulptIO from './SkulptIO';
 
 class Kiwi extends React.Component {
   render() {
@@ -13,4 +13,4 @@ class Kiwi extends React.Component {
   }
 }
 
-module.exports = Kiwi;
+export default Kiwi;

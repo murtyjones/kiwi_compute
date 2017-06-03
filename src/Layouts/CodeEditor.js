@@ -6,7 +6,6 @@
 
 import React from 'react';
 import Radium from 'radium';
-import skulpt from 'skulpt';
 
 const Header = require('../Components/Header');
 const SkulptIO = require('../Components/SkulptIO');

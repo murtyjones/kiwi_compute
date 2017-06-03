@@ -1,7 +1,7 @@
-const React = require('react');
-const ErrorMessage = require('./ErrorMessage');
-const Input = require('./InputArea');
-const Output = require('./OutputArea');
+import React from 'react';
+import ErrorMessage from './ErrorMessage';
+import Input from './InputArea';
+import Output from './OutputArea';
 
 class SkulptIO extends React.Component {
 
@@ -14,8 +14,8 @@ class SkulptIO extends React.Component {
           msg="this.props.output ? this.props.output : placeholder output"
         />
       </div>
-    )
+    );
   }
 }
 
-module.exports = SkulptIO;
+export default SkulptIO;

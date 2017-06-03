@@ -5,6 +5,7 @@
   "dependencies": {
     "radium": "^0.19.1",
     "react": "^15.5.4",
+    "react-autosuggest": "^9.0.1",
     "react-dom": "^15.5.4",
     "skulpt": "^0.11.1"
   },
