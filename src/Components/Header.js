@@ -1,7 +1,7 @@
-const React = require('react');
-const Run = require('./ButtonRun');
-const Save = require('./ButtonSave');
-const Tips = require('./ButtonTips');
+import React from 'react';
+import Run from './ButtonRun';
+import Save from './ButtonSave';
+import Tips from './ButtonTips';
 
 class Header extends React.Component {
   render() {
@@ -18,4 +18,4 @@ class Header extends React.Component {
   }
 }
 
-module.exports = Header;
+export default Header;

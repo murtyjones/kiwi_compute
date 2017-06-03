@@ -1,4 +1,4 @@
-const React = require('react');
+import React from 'react';
 
 class ButtonSave extends React.Component {
 
@@ -16,5 +16,4 @@ class ButtonSave extends React.Component {
     )
   }
 }
-
-module.exports = ButtonSave;
+export default ButtonSave;

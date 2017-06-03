@@ -1,7 +1,7 @@
-const React = require('react');
-const ErrorMessage = require('./ErrorMessage');
-const InputArea = require('./InputArea');
-const OutputArea = require('./OutputArea');
+import React from 'react';
+import ErrorMessage from './ErrorMessage';
+import InputArea from'./InputArea';
+import OutputArea  from './OutputArea';
 
 class SkulptIO extends React.Component {
   render() {
@@ -21,4 +21,4 @@ class SkulptIO extends React.Component {
   }
 }
 
-module.exports = SkulptIO;
+export default SkulptIO;

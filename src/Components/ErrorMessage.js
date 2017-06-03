@@ -1,4 +1,4 @@
-const React = require('react');
+import React from 'react';
 
 class ErrorMessage extends React.Component {
   render() {
@@ -12,4 +12,4 @@ class ErrorMessage extends React.Component {
   }
 }
 
-module.exports = ErrorMessage;
+export default ErrorMessage;

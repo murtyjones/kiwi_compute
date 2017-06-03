@@ -5,9 +5,7 @@
  */
 
 import React from 'react';
-import Radium from 'radium';
 import skulpt from 'skulpt';
-
 import Header from '../Components/Header';
 import SkulptIO from '../Components/SkulptIO';
 
@@ -67,4 +65,4 @@ class CodeEditor extends React.Component {
   }
 }
 
-export default Radium(CodeEditor);
+export default CodeEditor;
