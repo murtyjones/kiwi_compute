@@ -3,15 +3,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
 
 class ButtonRun extends React.Component {
-  runCode() {
-    alert('RUN clicked');
-  }
-
   render() {
     const { runCode } = this.props;
     return (
       <RaisedButton
-        onClick={() => this.runCode()}
+        onClick={runCode}
         label="START"
         labelPosition="before"
         primary={true}
