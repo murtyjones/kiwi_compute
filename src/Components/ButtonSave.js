@@ -1,4 +1,6 @@
 import React from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+
 
 class ButtonSave extends React.Component {
 
@@ -8,11 +10,11 @@ class ButtonSave extends React.Component {
 
   render() {
     return (
-      <button
-        onClick={() => this.save()}
-      >
-        SAVE
-      </button>
+      <RaisedButton
+        label="SAVE"
+        labelPosition="before"
+        primary={true}
+      />
     )
   }
 }
