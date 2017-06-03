@@ -5,9 +5,12 @@ const Tips = require('./ButtonTips');
 
 class Header extends React.Component {
   render() {
+    const { runCode } = this.props;
     return (
       <div>
-        <Run />
+        <Run
+          runCode={runCode}
+        />
         <Save />
         <Tips />
       </div>
