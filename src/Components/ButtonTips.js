@@ -1,3 +1,4 @@
+import RaisedButton from 'material-ui/RaisedButton';
 const React = require('react');
 
 class ButtonTips extends React.Component {
@@ -8,13 +9,13 @@ class ButtonTips extends React.Component {
 
   render() {
     return (
-      <button
-        onClick={() => this.showTips()}
-      >
-        Tips & Tricks
-      </button>
+      <RaisedButton
+        label="Tips & Tricks"
+        labelPosition="before"
+        primary={true}
+      />
     )
   }
 }
 
-module.exports = ButtonTips;
+export default ButtonTips;
