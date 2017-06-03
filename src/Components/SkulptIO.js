@@ -1,17 +1,21 @@
 import React from 'react';
+
 import ErrorMessage from './ErrorMessage';
-import Input from './InputArea';
-import Output from './OutputArea';
+import InputArea from './InputArea';
+import OutputArea from './OutputArea';
 
 class SkulptIO extends React.Component {
-
   render() {
+    const { editorInput, editorOutput, inputUpdate, errorMsg } = this.props;
     return (
       <div>
-        <ErrorMessage msg="Ya done goofed"/>
-        <Input />
-        <Output
-          msg="this.props.output ? this.props.output : placeholder output"
+        <ErrorMessage msg={errorMsg} />
+        <InputArea
+          editorInput={editorInput}
+          inputUpdate={inputUpdate}
+        />
+        <OutputArea
+          editorOutput={editorOutput}
         />
       </div>
     );

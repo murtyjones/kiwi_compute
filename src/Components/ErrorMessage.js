@@ -3,7 +3,11 @@ const React = require('react');
 class ErrorMessage extends React.Component {
   render() {
     return (
-      <p>ERROR: {this.props.msg}</p>
+      this.props.msg ? (
+        <p>ERROR: {this.props.msg}</p>
+      ) : (
+        <p></p>
+      )
     )
   }
 }

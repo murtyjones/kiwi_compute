@@ -3,8 +3,13 @@ import Autosuggest from 'react-autosuggest';
 
 const keywords = [
   {
-    name: 'C',
-    year: 1972
+    name: 'C'
+  },
+  {
+    name: 'A'
+  },
+  {
+    name: 'B'
   }
 ];
 
