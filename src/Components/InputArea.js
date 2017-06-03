@@ -1,47 +1,18 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
-
-const keywords = [
-  'and', 
-  'as', 
-  'assert', 
-  'break', 
-  'class', 
-  'continue', 
-  'def', 
-  'del', 
-  'elif', 
-  'else', 
-  'except', 
-  'exec', 
-  'finally', 
-  'for', 
-  'from', 
-  'global', 
-  'if', 
-  'import', 
-  'in', 
-  'is', 
-  'lambda', 
-  'not', 
-  'or', 
-  'pass', 
-  'print', 
-  'raise', 
-  'return', 
-  'try', 
-  'while', 
-  'with', 
-  'yield'
-];
+import pythonKeywords from './Helpers';
 
 const getSuggestions = value => {
-  const inputValue = value.trim().toLowerCase();
+  const inputValue = truncatePrevWords(value);
   const inputLength = inputValue.length;
   
-  return inputLength === 0 ? [] : keywords.filter(lang =>
+  return inputLength === 0 ? [] : pythonKeywords.filter(lang =>
     lang.toLowerCase().slice(0, inputLength) === inputValue
   );
+};
+
+const truncatePrevWords = input => {
+  return input.split(" ").slice(-1)[0].toLowerCase();
 };
 
 const getSuggestionValue = suggestion => suggestion;
