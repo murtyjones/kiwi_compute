@@ -7,8 +7,9 @@ class ButtonRun extends React.Component {
   }
 
   render() {
+    const { runCode } = this.props;
     return (
-      <button onClick={() => this.runCode()}>
+      <button onClick={runCode}>
         RUN
       </button>
     )
