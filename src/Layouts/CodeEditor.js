@@ -23,9 +23,12 @@ class CodeEditor extends React.Component {
     this.setState({editorInput: event.target.value});
   }
 
-  codeOutput = (text) => {
+  codeRunSuccess = (text) => {
     if (text.length > 1) {
-      this.setState({editorOutput: text});
+      this.setState({
+        editorOutput: text,
+        errorMsg: '',
+      });
     }
   }
 
@@ -39,12 +42,15 @@ class CodeEditor extends React.Component {
     const programToRun = this.state.editorInput;
     skulpt.canvas = "mycanvas";
     skulpt.pre = "output";
-    skulpt.configure({output:this.codeOutput, read:this.builtinRead});
+    skulpt.configure({output:this.codeRunSuccess, read:this.builtinRead});
     try {
       eval(skulpt.importMainWithBody("<stdin>", false, programToRun));
     }
     catch(e) {
-      this.setState({errorMsg: e.toString()});
+      this.setState({
+        errorMsg: e.toString(),
+        editorOutput: '',
+      });
     }
   }
 
