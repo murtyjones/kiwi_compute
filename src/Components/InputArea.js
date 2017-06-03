@@ -2,15 +2,37 @@ import React from 'react';
 import Autosuggest from 'react-autosuggest';
 
 const keywords = [
-  {
-    name: 'C'
-  },
-  {
-    name: 'A'
-  },
-  {
-    name: 'B'
-  }
+  'and', 
+  'as', 
+  'assert', 
+  'break', 
+  'class', 
+  'continue', 
+  'def', 
+  'del', 
+  'elif', 
+  'else', 
+  'except', 
+  'exec', 
+  'finally', 
+  'for', 
+  'from', 
+  'global', 
+  'if', 
+  'import', 
+  'in', 
+  'is', 
+  'lambda', 
+  'not', 
+  'or', 
+  'pass', 
+  'print', 
+  'raise', 
+  'return', 
+  'try', 
+  'while', 
+  'with', 
+  'yield'
 ];
 
 const getSuggestions = value => {
@@ -18,15 +40,15 @@ const getSuggestions = value => {
   const inputLength = inputValue.length;
   
   return inputLength === 0 ? [] : keywords.filter(lang =>
-    lang.name.toLowerCase().slice(0, inputLength) === inputValue
+    lang.toLowerCase().slice(0, inputLength) === inputValue
   );
 };
 
-const getSuggestionValue = suggestion => suggestion.name;
+const getSuggestionValue = suggestion => suggestion;
 
 const renderSuggestion = suggestion => (
   <div>
-    {suggestion.name}
+    {suggestion}
   </div>
 );
 
