@@ -8,6 +8,9 @@ import React from 'react';
 import Radium from 'radium';
 import skulpt from 'skulpt';
 
+const Header = require('../Components/Header');
+const SkulptIO = require('../Components/SkulptIO');
+
 class CodeEditor extends React.Component {
   constructor(props) {
     super(props);
@@ -18,8 +21,9 @@ class CodeEditor extends React.Component {
 
   render() {
     return (
-      <div>
-        Hello
+      <div className="kiwi">
+        <Header />
+        <SkulptIO />
       </div>
     );
   }
