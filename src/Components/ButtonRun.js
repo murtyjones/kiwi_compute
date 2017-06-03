@@ -1,18 +1,23 @@
-const React = require('react');
+import React from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+import ActionAndroid from 'material-ui/svg-icons/action/android';
 
 class ButtonRun extends React.Component {
-
   runCode() {
     alert('RUN clicked');
   }
 
   render() {
     return (
-      <button onClick={() => this.runCode()}>
-        RUN
-      </button>
+      <RaisedButton
+        onClick={() => this.runCode()}
+        label="START"
+        labelPosition="before"
+        primary={true}
+        icon={<ActionAndroid />}
+       />
     )
   }
 }
 
-module.exports = ButtonRun;
+export default ButtonRun;
