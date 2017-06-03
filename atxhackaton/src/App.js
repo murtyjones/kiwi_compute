@@ -4,6 +4,7 @@ import FontAwesome from 'react-fontawesome';
 import './App.css';
 import axios from 'axios';
 import renderIf from 'render-if';
+import ListSavedText from './component/ListSavedText';
 
 class App extends Component {
   constructor(props){
@@ -15,7 +16,10 @@ class App extends Component {
       loggedIn: false,
       signedUp: "false",
       ulogged: "false",
-      text: ""
+      text: "",
+      retrieved: false,
+      returnTexts: []
+
     }
   }
 
@@ -78,6 +82,26 @@ class App extends Component {
   }
 
 
+  retrieveText(e){
+    var self = this;
+    e.preventDefault();
+    axios.post('http://localhost:5000/retrieveText',{
+      username: this.state.username,
+      password: this.state.password
+    })
+      .then((response)=>{
+          console.log('response from the retrieveText ' , response);
+
+          if (response.data.returnTexts.length>0){
+            self.setState({
+              returnTexts: response.data.returnTexts,
+              retrieved: true
+            })
+          }
+        });
+  }
+
+
   signupHandle(e){
     e.preventDefault();
     console.log('inside signupHandle');
@@ -105,6 +129,21 @@ class App extends Component {
 
 
   render() {
+
+
+            let listSavedTexts;
+
+            if(this.state.returnTexts.length!=0){
+              // console.log("this.state.goalsToday if is (first condition)", this.state.goalsToday);
+                  listSavedTexts = this.state.returnTexts.map((returnedText,i) => {
+                    return (
+                      <ListSavedText key={i} returnedText={returnedText}/>
+                    );
+                  });
+            }
+            if(this.state.returnTexts.length===0){
+              listSavedTexts = <div><p>You have no texts to return!</p></div>
+            }
 
 
     return (
@@ -167,7 +206,15 @@ class App extends Component {
                           placeholder="text"
                   ></textarea>
                   <button onClick={(e)=>this.saveText(e)}>Save Text!</button>
+                  <button onClick={(e)=>this.retrieveText(e)}>Retrieve Text!</button>
                 </form>
+
+                {renderIf(this.state.retrieved === true)(
+                  <div>
+                    {listSavedTexts}
+                  </div>
+                )}
+
               </div>
             )}
             {renderIf(this.state.loggedIn === false)(

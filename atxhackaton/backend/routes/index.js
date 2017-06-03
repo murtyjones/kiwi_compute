@@ -216,5 +216,73 @@ router.post('/savetext', function(req,res,next){
     });
 })
 
+router.post('/retrievetext', function(req,res,next){
+
+  var username = req.body.username;
+  var password = req.body.password;
+  var redirectistrue = false;
+  var numbernomatches = 0;
+  var returnTexts = [];
+
+
+  console.log('inside retrievetext');
+
+  var promise = new Promise(function(resolve, reject){
+
+    Profile.find({}, function(err,posts){
+      console.log('inside profileSchema search (retrievetext)');
+      var loopcounter = 0;
+      posts.forEach(function(post){
+        // console.log("post ", post);
+        // console.log("req.body.username ", req.body.username, " req.body.password ", req.body.password);
+        if (post.username == req.body.username){
+          bcryptaspromised.compare(req.body.password, post.password)
+              .then(function(result){
+                console.log('inside the bcryptaspromised checker "OK" in retrievetext')
+                var postid = post._id;
+                TextSave.find({}, function(err,posts){
+                  postslength = posts.length;
+                  posts.forEach(function(post){
+                    console.log('***********************************************************************************************************');
+                    console.log('inside the TextSave')
+                    console.log('the value of the post.postid is', post.postid, 'and the value of the postid is ', postid);
+                    console.log('the value of the post is', post);
+                    console.log('the value of the post length is ', postslength, ' and the value of the loopcounter is ', loopcounter);
+                    console.log('***********************************************************************************************************');
+                    if(post.postid==postid){
+                      console.log('inside the postid=postid');
+                      returnTexts.push(post.text);
+                    }
+                    if(loopcounter===(postslength-1)){
+                      resolve(true);
+                    }
+                    loopcounter++;
+                  })
+                })
+              })
+              .catch(bcryptaspromised.MISMATCH_ERROR, function(result){
+                  console.log('bcrypt catch MISMATCH_ERROR');
+              });
+        }else{
+          numbernomatches += 1;
+        }
+      });
+    });
+
+  });
+
+    promise.then(function(resolve){
+      console.log('in promise.then of retrievetext and the value of the resolve is ', true);
+      if (resolve){
+        res.json({"returnTexts": returnTexts})
+      }else{
+        res.send({'returnTexts': "you have no texts"})
+      }
+    });
+
+})
+
+
+
 
 module.exports = router;
