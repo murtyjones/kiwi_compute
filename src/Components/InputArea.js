@@ -1,14 +1,15 @@
-const React = require('react');
+import React from 'react';
+import TextField from 'material-ui/TextField';
 
 class InputArea extends React.Component {
 
   render() {
     return (
-      <textarea placeholder="input" onChange={this.props.inputUpdate}>
-        { this.props.editorInput }
-      </textarea>
+      <TextField
+        multiLine={true}
+      />
     )
   }
 }
 
-module.exports = InputArea;
+export default InputArea;
