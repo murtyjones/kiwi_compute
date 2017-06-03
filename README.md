@@ -119,7 +119,7 @@ $ npm start
 ### User Stories
 
  - Need
-    -  
+    -  Build UI Team 
  - Want
     -
  - Wish
