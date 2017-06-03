@@ -8,6 +8,7 @@ class ButtonRun extends React.Component {
   }
 
   render() {
+    const { runCode } = this.props;
     return (
       <RaisedButton
         onClick={() => this.runCode()}
@@ -15,7 +16,7 @@ class ButtonRun extends React.Component {
         labelPosition="before"
         primary={true}
         icon={<ActionAndroid />}
-       />
+      />
     )
   }
 }

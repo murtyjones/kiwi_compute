@@ -1,17 +1,20 @@
 const React = require('react');
 const ErrorMessage = require('./ErrorMessage');
-const Input = require('./InputArea');
-const Output = require('./OutputArea');
+const InputArea = require('./InputArea');
+const OutputArea = require('./OutputArea');
 
 class SkulptIO extends React.Component {
-
   render() {
+    const { editorInput, editorOutput, inputUpdate, errorMsg } = this.props;
     return (
       <div>
-        <ErrorMessage msg="Ya done goofed"/>
-        <Input />
-        <Output
-          msg="this.props.output ? this.props.output : placeholder output"
+        <ErrorMessage msg={errorMsg} />
+        <InputArea
+          editorInput={editorInput}
+          inputUpdate={inputUpdate}
+        />
+        <OutputArea
+          editorOutput={editorOutput}
         />
       </div>
     )

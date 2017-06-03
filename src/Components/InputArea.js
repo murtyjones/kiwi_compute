@@ -4,7 +4,9 @@ class InputArea extends React.Component {
 
   render() {
     return (
-      <textarea placeholder="input"></textarea>
+      <textarea placeholder="input" onChange={this.props.inputUpdate}>
+        { this.props.editorInput }
+      </textarea>
     )
   }
 }
