@@ -28,9 +28,15 @@ class InputArea extends React.Component {
   }
 
   autoComplete = cm => {
-    console.log(this.refs);
     const codeMirror = this.refs.editor.getCodeMirrorInstance();
-    codeMirror.showHint(cm, codeMirror.hint.javascript);
+
+    const orig = codeMirror.hint.javascript;
+    codeMirror.hint.javascript = function(cm) {
+      const inner = orig(cm) || {from: cm.getCursor(), to: cm.getCursor(), list: []};
+      inner.list = [ "bozo", "foo", "bar" ];
+      return inner;
+    };
+    codeMirror.showHint(cm, orig);
   }
 
   render() {
