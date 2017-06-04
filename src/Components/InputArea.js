@@ -19,10 +19,6 @@ const options = {
   mode: 'python'
 };
 
-const style = {
-  color: 'yellow'
-}
-
 class InputArea extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.errorLine) {
