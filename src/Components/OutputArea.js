@@ -12,7 +12,9 @@ function OutputArea(props) {
   return (
     <Card className="output">
       <CardText>
-        { editorOutput }
+        <pre>
+          { editorOutput }
+        </pre>
       </CardText>
     </Card>
   )
