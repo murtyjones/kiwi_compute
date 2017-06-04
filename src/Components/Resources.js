@@ -36,10 +36,6 @@ function Resources(props) {
   const leftCol = resources.slice(0, mid);
   const rightCol = resources.slice(mid, len);
 
-  const getResourceTitle = (resource) => {
-    return resource.title
-  }
-
   const getResourceCodeOrURL = (resource) => {
     if(resource.code){
       return resource.code
@@ -86,7 +82,7 @@ function Resources(props) {
               return (
                 <Card style={styles.cards}>
                   <CardHeader
-                    title={getResourceTitle(resource)}
+                    title={resource.title}
                     subtitle={resource.description}
                   />
                   <CardText>
