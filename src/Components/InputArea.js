@@ -15,7 +15,8 @@ import { introEditorInput } from '../intro';
 
 const options = {
   lineNumbers: true,
-  mode: 'python',
+  lineWrapping: true,
+  mode: 'python'
 };
 
 class InputArea extends React.Component {
