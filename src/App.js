@@ -14,6 +14,8 @@ import { kiwiGreen, kiwiLightGreen, kiwiPurple, kiwiLightPurple,
         kiwiDarkBlue, kiwiLightRed, kiwiWhite, kiwiYellow, kiwiTurq,
         kiwiOrange, kiwiLightBlue, kiwiDarkGreen } from './colors';
 
+import logoPath from './assets/logo/logo.png';
+
 const main_theme = getMuiTheme({
   palette: {
     primary1Color: kiwiGreen,
@@ -80,14 +82,33 @@ class App extends Component {
   }
 
   render() {
+
+    const styles = {
+      dropdown: {
+        alignItems: 'bottom',
+        position: 'absolute',
+        bottom: '20',
+        right: '0'
+      }
+    }
+
     return (
       <MuiThemeProvider muiTheme={this.state.theme}>
         <div>
           <AppBar
-            title="Kiwi Compute"
-            showMenuIconButton={false}
+            iconElementLeft={
+              <img
+                height='160'
+                alt='Kiwi Compute logo'
+                src={logoPath}
+              />
+            }
           >
-            <DropDownMenu value={this.state.themeValue} onChange={this.handleThemeChange}>
+            <DropDownMenu
+              value={this.state.themeValue}
+              onChange={this.handleThemeChange}
+              style={styles.dropdown}
+            >
               <MenuItem value={1} primaryText="kiwi" />
               <MenuItem value={2} primaryText="blueberry" />
               <MenuItem value={3} primaryText="lime" />
