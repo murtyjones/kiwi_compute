@@ -69,6 +69,7 @@ class CodeEditor extends React.Component {
         errorLine: e.traceback[0].lineno,
         editorOutput: '',
       });
+      codeOutput = '';
     });
   }
 
