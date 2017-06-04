@@ -33,7 +33,7 @@ class CodeEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorInput: 'print "Test"',
+      editorInput: 'print "Write Your Code Here"',
       editorOutput: '',
       errorMsg: '',
       errorLine: null,

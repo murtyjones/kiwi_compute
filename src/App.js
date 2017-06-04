@@ -72,9 +72,9 @@ class App extends Component {
             showMenuIconButton={false}
           >
             <DropDownMenu value={this.state.themeValue} onChange={this.handleThemeChange}>
-              <MenuItem value={1} primaryText="Kiwi" />
-              <MenuItem value={2} primaryText="Midnight" />
-              <MenuItem value={3} primaryText="Daylight" />
+              <MenuItem value={1} primaryText="kiwi" />
+              <MenuItem value={2} primaryText="blueberry" />
+              <MenuItem value={3} primaryText="lime" />
             </DropDownMenu>
           </AppBar>
           <Container fluid>
