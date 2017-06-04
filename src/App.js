@@ -63,6 +63,11 @@ class App extends Component {
     this.setState({value});
   }
 
+  componentDidMount(){
+    localStorage.setItem('loggedIn', false);
+    localStorage.setItem('saveButtonClick', false);
+  }
+
   render() {
     return (
       <MuiThemeProvider muiTheme={this.state.theme}>
