@@ -59,4 +59,29 @@ exports.resources = [
     description: 'A dictionary is a list of pairs with the structure like [key, value]. When you reference key, it will give you the value.',
     code: 'stuff ={‘name’: ‘kiwi’, ‘hair’: ‘brown’, ‘eyes’: ‘blue’}\nprint stuff [‘name’]',
   },
+  {
+    title: 'Python for Kids',
+    description: 'A book for new coders. Make sure you search with “ctrl” + “f” to find what you’re looking for.',
+    url: 'https://doc.lagout.org/programmation/python/Python%20for%20Kids_%20A%20Playful%20Introduction%20to%20Programming%20%5BBriggs%202012-12-22%5D.pdf'
+  },
+  {
+    title: 'Learn Python the Hard Way',
+    description: 'Look through the different chapters and find tips on how to help. There are sections for key aspects of Python.',
+    url: 'http://learnpythonthehardway.org'
+  },
+  {
+    title: 'Python for Kids Cheat Sheet',
+    description: 'Shows you key words and functions on one page.',
+    url: 'http://www.dummies.com/programming/python/python-for-kids-for-dummies-cheat-sheet'
+  },
+  {
+    title: 'Python for Beginners',
+    description: 'Shows you key words and functions on one page.',
+    url: 'http://www.pythonforbeginners.com/cheatsheet/python-glossary'
+  },
+  {
+    title: 'Python Cheat Sheet for Beginners',
+    description: 'Shows you key words and functions on one page.',
+    url: 'https://lifehacker.com/keep-this-python-cheat-sheet-on-hand-when-learning-to-c-1655521825'
+  }
 ];
