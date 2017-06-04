@@ -10,9 +10,7 @@ import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import renderIf from 'render-if';
 import axios from 'axios';
-import {List, ListItem} from 'material-ui/List';
-// import ReturnText from 'ReturnText';
-
+import { List, ListItem } from 'material-ui/List';
 
 import { introStart, introSave, introDemo, introResources } from '../intro';
 
@@ -22,37 +20,38 @@ const styles = {
     marginBottom: '10px',
   },
   button: {
+    marginTop: '6px',
+    marginRight: '10px',
+    marginBottom: '6px',
+  },
+  textInput: {
     marginRight: '10px',
   },
-}
-
-
+};
 
 class EditorControls extends Component {
   constructor(props){
-  super(props);
-  this.state={
-    username: '',
-    password: '',
-    loggedIn: false,
-    loginId: '',
-    signedUp: '',
-    returnTexts: '',
-    retrieved: false,
-    saveForm: false,
-    saveButton: false,
-    modalSave: false,
-    filename: ""
+    super(props);
+    this.state={
+      username: '',
+      password: '',
+      loggedIn: false,
+      loginId: '',
+      signedUp: '',
+      returnTexts: '',
+      retrieved: false,
+      saveForm: false,
+      saveButton: false,
+      modalSave: false,
+      filename: ""
+    }
   }
-}
-
-
 
  saveClick(e){
     e.preventDefault();
     this.setState({
-      saveForm: true
-    })
+      saveForm: true,
+    });
   }
 
   loginClick(e){
@@ -108,15 +107,12 @@ class EditorControls extends Component {
         });
    }
 
-
-
     saveFileClick(e){
       e.preventDefault();
       this.setState({
         modalSave: true
       })
     }
-
 
     filenameClick(e){
       e.preventDefault();
@@ -134,7 +130,6 @@ class EditorControls extends Component {
                 })
               });
     }
-
 
    openFileClick(e){
      e.preventDefault();
@@ -197,8 +192,7 @@ class EditorControls extends Component {
         dataStep={2}
       />
 
-
-      {renderIf(this.state.saveButton===false)(
+      {renderIf(this.state.saveForm === false && this.state.loggedIn === false)(
         <Button
           label={"LOGIN"}
           style={styles.button}
@@ -209,36 +203,37 @@ class EditorControls extends Component {
       )}
 
       {renderIf(this.state.saveForm===true)(
-        <div>
-        <TextField
-            hintText="Enter Username"
-            floatingLabelText="Username"
-            onChange={(e)=>this.setState({username: e.target.value })}
-        />
-        <TextField
-           hintText="Enter Password"
-           floatingLabelText="Password"
-           onChange={(e)=>this.setState({password: e.target.value })}
-         />
-         <Button
-           label={"LOGIN"}
-           style={styles.button}
-           dataIntro={introSave}
-           dataStep={4}
-           onClick={(e)=>{this.loginClick(e)}}
-         />
-         <Button
-           label={"SIGNUP"}
-           style={styles.button}
-           dataIntro={introSave}
-           dataStep={4}
-           onClick={(e)=>{this.signupClick(e)}}
-         />
-         </div>
+        <span>
+          <TextField
+              hintText="Enter Username"
+              onChange={(e)=>this.setState({username: e.target.value })}
+              style={styles.textInput}
+          />
+          <TextField
+             hintText="Enter Password"
+             onChange={(e)=>this.setState({password: e.target.value })}
+             type='password'
+             style={styles.textInput}
+           />
+           <Button
+             label={"LOGIN"}
+             style={styles.button}
+             dataIntro={introSave}
+             dataStep={4}
+             onClick={(e)=>{this.loginClick(e)}}
+           />
+           <Button
+             label={"SIGNUP"}
+             style={styles.button}
+             dataIntro={introSave}
+             dataStep={4}
+             onClick={(e)=>{this.signupClick(e)}}
+           />
+         </span>
       )}
 
       {renderIf(this.state.saveButton===true)(
-        <div>
+        <span>
          <Button
            label={"SAVE"}
            style={styles.button}
@@ -253,7 +248,7 @@ class EditorControls extends Component {
            dataStep={4}
            onClick={(e)=>{this.openFileClick(e)}}
          />
-         </div>
+         </span>
       )}
 
 
@@ -274,22 +269,16 @@ class EditorControls extends Component {
            dataStep={4}
            onClick={(e)=>{this.filenameClick(e)}}
          />
-
       </Dialog>
 
       <Dialog
         title="Retrieve Files"
         open={this.state.retrieved}
         modal={true}>
-
         <List>
           {listSavedFiles}
         </List>
-
       </Dialog>
-
-
-
 
       <Button
         label={"How to use this Kiwi Editor"}
