@@ -11,33 +11,42 @@ import MenuItem from 'material-ui/MenuItem';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import { kiwiGreen, kiwiLightGreen, kiwiPurple, kiwiLightPurple,
-        kiwiDarkBlue, kiwiLightRed, kiwiWhite, kiwiYellow, kiwiLimeGreen,
-        kiwiPastel, kiwiLightBlue, kiwiDarkGreen } from './colors';
+        kiwiDarkBlue, kiwiLightRed, kiwiWhite, kiwiYellow, kiwiTurq,
+        kiwiOrange, kiwiLightBlue, kiwiDarkGreen } from './colors';
 
 const main_theme = getMuiTheme({
   palette: {
     primary1Color: kiwiGreen,
     primary2Color: kiwiLightPurple,
     accent1Color: kiwiPurple,
-    accent2Color: kiwiLightGreen
-  }
+    accent2Color: kiwiLightGreen,
+    textColor: kiwiLightPurple,
+    alternateTextColor: kiwiLightPurple,
+    canvasColor: kiwiPurple
+    }
 });
 
 const alt_theme1 = getMuiTheme({
   palette: {
     primary1Color: kiwiDarkBlue,
-    primary2Color: kiwiLightRed,
-    accent1Color: kiwiWhite,
-    accent2Color: kiwiYellow
+    primary2Color: kiwiWhite,
+    accent1Color: kiwiYellow,
+    accent2Color: kiwiYellow,
+    textColor: "white",
+    alternateTextColor: "white",
+    canvasColor: kiwiYellow
   }
 });
 
 const alt_theme2 = getMuiTheme({
   palette: {
-    primary1Color: kiwiLimeGreen,
-    primary2Color: kiwiPastel,
-    accent1Color: kiwiLightBlue,
-    accent2Color: kiwiDarkGreen
+    primary1Color: kiwiTurq,
+    primary2Color: kiwiOrange,
+    accent1Color: kiwiOrange,
+    accent2Color: kiwiDarkGreen,
+    textColor: kiwiLightBlue,
+    alternateTextColor: kiwiLightBlue,
+    canvasColor:  kiwiOrange
   }
 });
 
@@ -72,9 +81,9 @@ class App extends Component {
             showMenuIconButton={false}
           >
             <DropDownMenu value={this.state.themeValue} onChange={this.handleThemeChange}>
-              <MenuItem value={1} primaryText="Kiwi" />
-              <MenuItem value={2} primaryText="Midnight" />
-              <MenuItem value={3} primaryText="Daylight" />
+              <MenuItem value={1} primaryText="kiwi" />
+              <MenuItem value={2} primaryText="blueberry" />
+              <MenuItem value={3} primaryText="lime" />
             </DropDownMenu>
           </AppBar>
           <Container fluid>

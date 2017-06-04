@@ -19,12 +19,12 @@ import { introEditorInput } from '../intro';
 
 
 class InputArea extends React.Component {
-  componentWillReceiveProps() {
-    if (this.props.errorLine > -1) {
-      // TODO add highlighting to line with error
-      // this.refs.editor.codeMirror.addLineClass(this.props.errorLine, 'wrap', 'some-class');
-    } else {
-      // TODO clear error highlighting
+  componentWillReceiveProps(nextProps) {
+    if (this.props.errorLine) {
+      this.refs.editor.codeMirror.removeLineClass((this.props.errorLine - 1), 'wrap', 'error-highlight');
+    }
+    if (nextProps.errorLine) {
+      this.refs.editor.codeMirror.addLineClass((nextProps.errorLine - 1), 'wrap', 'error-highlight');
     }
   }
 
@@ -50,9 +50,9 @@ class InputArea extends React.Component {
         'Ctrl-Space': this.autoComplete
       }
     };
+      
+    const { editorInput, updateFocus, updateInput } = this.props;
 
-    const { editorInput, updateInput } = this.props;
-    
     return (
       <Card
         data-intro={introEditorInput}
@@ -62,6 +62,7 @@ class InputArea extends React.Component {
           ref="editor"
           value={editorInput}
           onChange={updateInput}
+          onFocusChange={updateFocus}
           options={options}
         />
       </Card>

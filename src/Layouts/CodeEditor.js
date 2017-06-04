@@ -12,10 +12,10 @@ import 'intro.js/introjs.css';
 import 'intro.js/themes/introjs-flattener.css';
 
 import EditorControls from '../Components/EditorControls';
-import ErrorMessage from '../Components/ErrorMessage';
 import InputArea from'../Components/InputArea';
 import OutputArea from '../Components/OutputArea';
 import Resources from '../Components/Resources';
+import { Tabs, Tab } from 'material-ui/Tabs';
 
 let codeOutput = '';
 
@@ -23,16 +23,24 @@ class CodeEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorInput: 'print "Test"',
+      editorInput: 'print "Write Your Code Here"',
       editorOutput: '',
       errorMsg: '',
       errorLine: null,
       isResourcesShowing: false,
+      tabFocus: 'input'
     };
   }
 
   handleEditorChange = (value) => {
     this.setState({ editorInput: value });
+  }
+
+  handleFocusChange = (focused) => {
+    const tabFocus = focused ? "input" : "output";
+    this.setState({
+      tabFocus: tabFocus
+    });
   }
 
   lineExecuteSuccess = (text) => {
@@ -60,15 +68,17 @@ class CodeEditor extends React.Component {
         editorOutput: codeOutput,
         errorMsg: '',
         errorLine: null,
+        tabFocus: 'output'
       });
       codeOutput = '';
     }, (e) => {
-      console.log('Error!', e);
       this.setState({
         errorMsg: e.toString(),
         errorLine: e.traceback[0].lineno,
         editorOutput: '',
+        tabFocus: 'output'
       });
+      codeOutput = '';
     });
   }
 
@@ -83,7 +93,11 @@ class CodeEditor extends React.Component {
   }
 
   render() {
-    const { editorInput, editorOutput, errorMsg, errorLine, isResourcesShowing } = this.state;
+    const { editorInput, editorOutput, errorMsg, errorLine, isResourcesShowing, tabFocus } = this.state;
+
+    const inputLabel = this.state.tabFocus === 'input' ? "Enter your Python code on here, then click 'START'" : '';
+    const outputLabel = this.state.tabFocus === 'output' ? 'Check out the results of your Python code here.' : '';
+
     return (
       <div>
         <Resources
@@ -98,18 +112,30 @@ class CodeEditor extends React.Component {
               showResources={this.toggleResources}
             />
           </Col>
-          <Col md={6}>
-            <InputArea
-              editorInput={editorInput}
-              updateInput={this.handleEditorChange}
-              errorLine={errorLine}
-            />
-          </Col>
-          <Col md={6}>
-            <OutputArea
-              editorOutput={editorOutput}
-              errorMsg={errorMsg}
-            />
+          <Col md={12}>
+            <Tabs
+              value={tabFocus}
+              onChange={this.handleChange}
+            >
+               <Tab label={inputLabel} value="input">
+               </Tab>
+               <Tab label={outputLabel} value="output">
+               </Tab>
+              </Tabs>
+              <Col md={6}>
+                <InputArea
+                  editorInput={editorInput}
+                  updateFocus={this.handleFocusChange}
+                  updateInput={this.handleEditorChange}
+                  errorLine={errorLine}
+                />
+              </Col>
+              <Col md={6}>
+                <OutputArea
+                  editorOutput={editorOutput}
+                  errorMsg={errorMsg}
+                />
+              </Col>
           </Col>
         </Row>
       </div>
