@@ -26,6 +26,10 @@ const styles = {
   },
   textInput: {
     marginRight: '10px',
+    color: 'black',
+  },
+  textInputInput: {
+    color: 'black',
   },
 };
 
@@ -205,15 +209,17 @@ class EditorControls extends Component {
       {renderIf(this.state.saveForm===true)(
         <span>
           <TextField
-              hintText="Enter Username"
-              onChange={(e)=>this.setState({username: e.target.value })}
-              style={styles.textInput}
+            hintText="Enter Username"
+            onChange={(e)=>this.setState({username: e.target.value })}
+            style={styles.textInput}
+            inputStyle={styles.textInputInput}
           />
           <TextField
              hintText="Enter Password"
              onChange={(e)=>this.setState({password: e.target.value })}
              type='password'
              style={styles.textInput}
+             inputStyle={styles.textInputInput}
            />
            <Button
              label={"LOGIN"}

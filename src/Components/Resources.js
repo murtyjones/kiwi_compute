@@ -7,7 +7,7 @@
 import React from 'react';
 import { Row, Col } from 'react-grid-system';
 import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
 
 import { resources } from '../resources';
@@ -20,12 +20,15 @@ const styles = {
   cards: {
     marginTop: '10px',
   },
+  aTag: {
+    color: 'white',
+  },
 };
 
 function Resources(props) {
   const { show, hide } = props;
   const actions = [
-      <FlatButton
+      <RaisedButton
         label="Close"
         primary={true}
         onTouchTap={hide}
@@ -41,7 +44,7 @@ function Resources(props) {
       return resource.code
     } else if(resource.url) {
       return (
-        <a href = {resource.url} target="_blank">{resource.title}</a>
+        <a href={resource.url} target="_blank" style={styles.aTag}>{resource.title}</a>
       )
     }
   }
