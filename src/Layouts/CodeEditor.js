@@ -19,8 +19,8 @@ class CodeEditor extends React.Component {
     };
   }
 
-  handleEditorChange = (event) => {
-    this.setState({editorInput: event.target.value});
+  handleEditorChange = (value) => {
+    this.setState({editorInput: value});
   }
 
   codeRunSuccess = (text) => {
