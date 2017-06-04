@@ -1,6 +1,7 @@
 import React from 'react';
 import CodeMirror from 'react-codemirror';
 import TextField from 'material-ui/TextField';
+import 'codemirror/lib/codemirror.css';
 
 class InputArea extends React.Component {
   constructor(props) {

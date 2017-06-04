@@ -9,10 +9,10 @@ class SkulptIO extends React.Component {
     return (
       <div>
         <ErrorMessage msg={errorMsg} />
-        {/* <InputArea
+        <InputArea
           editorInput={editorInput}
           inputUpdate={inputUpdate}
-        /> */}
+        />
         <OutputArea
           editorOutput={editorOutput}
         />
