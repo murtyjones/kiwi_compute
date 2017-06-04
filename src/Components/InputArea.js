@@ -20,17 +20,16 @@ const options = {
 };
 
 class InputArea extends React.Component {
-  componentWillReceiveProps() {
-    if (this.props.errorLine > -1) {
-      // TODO add highlighting to line with error
-      // this.refs.editor.codeMirror.addLineClass(this.props.errorLine, 'wrap', 'some-class');
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errorLine) {
+      this.refs.editor.codeMirror.addLineClass((nextProps.errorLine - 1), 'wrap', 'error-highlight');
     } else {
-      // TODO clear error highlighting
+      this.refs.editor.codeMirror.addLineClass((this.props.errorLine - 1), 'wrap', 'error-fixed');
     }
   }
 
   render() {
-    const { editorInput, updateInput } = this.props;
+    const { editorInput, updateFocus, updateInput } = this.props;
     return (
       <Card
         data-intro={introEditorInput}
@@ -40,6 +39,7 @@ class InputArea extends React.Component {
           ref="editor"
           value={editorInput}
           onChange={updateInput}
+          onFocusChange={updateFocus}
           options={options}
         />
       </Card>

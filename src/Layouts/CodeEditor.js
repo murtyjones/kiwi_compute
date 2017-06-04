@@ -17,6 +17,16 @@ import InputArea from'../Components/InputArea';
 import OutputArea from '../Components/OutputArea';
 import Resources from '../Components/Resources';
 import renderIf from 'render-if';
+import {Tabs, Tab} from 'material-ui/Tabs';
+
+const styles = {
+  headline: {
+    fontSize: 24,
+    paddingTop: 16,
+    marginBottom: 12,
+    fontWeight: 400,
+  },
+};
 
 let codeOutput = '';
 
@@ -24,13 +34,14 @@ class CodeEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorInput: 'print "Test"',
+      editorInput: 'print "Write Your Code Here"',
       editorOutput: '',
       forceUpdateval: false,
       errorMsg: '',
       errorLine: null,
       isResourcesShowing: false,
-      changeInput: false
+      changeInput: false,
+      tabFocus: 'input'
     };
   }
 
@@ -60,6 +71,13 @@ class CodeEditor extends React.Component {
     this.setState({ editorInput: value });
   }
 
+  handleFocusChange = (focused) => {
+    const tabFocus = focused ? "input" : "output";
+    this.setState({
+      tabFocus: tabFocus
+    });
+  }
+
   lineExecuteSuccess = (text) => {
     codeOutput = codeOutput + text;
   }
@@ -85,14 +103,15 @@ class CodeEditor extends React.Component {
         editorOutput: codeOutput,
         errorMsg: '',
         errorLine: null,
+        tabFocus: 'output'
       });
       codeOutput = '';
     }, (e) => {
-      console.log('Error!', e);
       this.setState({
         errorMsg: e.toString(),
         errorLine: e.traceback[0].lineno,
         editorOutput: '',
+        tabFocus: 'output'
       });
       codeOutput = '';
     });
@@ -109,9 +128,11 @@ class CodeEditor extends React.Component {
   }
 
   render() {
-    const { editorInput, editorOutput, errorMsg, errorLine, isResourcesShowing } = this.state;
-    // console.log("editorInput inside CodeEditor is .... ",  editorInput);
-    console.log('inisde CodeEditor ', this.state.editorInput)
+
+    const { editorInput, editorOutput, errorMsg, errorLine, isResourcesShowing, tabFocus } = this.state;
+
+    const inputLabel = this.state.tabFocus === 'input' ? "Enter your Python code on here, then click 'START'" : '';
+    const outputLabel = this.state.tabFocus === 'output' ? 'Check out the results of your Python code here.' : '';
 
     return (
       <div>
@@ -129,6 +150,16 @@ class CodeEditor extends React.Component {
               showResources={this.toggleResources}
             />
           </Col>
+          <Col md={12}>
+            <Tabs
+              value={tabFocus}
+              onChange={this.handleChange}
+            >
+               <Tab label={inputLabel} value="input">
+               </Tab>
+               <Tab label={outputLabel} value="output">
+               </Tab>
+              </Tabs>
           <Col md={6}>
           {renderIf(this.state.changeInput===false)(
             <InputArea
@@ -150,6 +181,7 @@ class CodeEditor extends React.Component {
               editorOutput={editorOutput}
               errorMsg={errorMsg}
             />
+        </Col>
           </Col>
         </Row>
       </div>

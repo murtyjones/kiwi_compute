@@ -109,20 +109,6 @@ class EditorControls extends Component {
         });
    }
 
-  //  saveFileClick(e){
-  //    e.preventDefault();
-  //    console.log("this.props.editorInput is ", this.props.editorInput);
-  //    axios.post('http://localhost:5000/savetext',{
-  //       userId:  this.state.loginId,
-  //       text: this.props.editorInput
-  //     })
-  //       .then((response)=>{
-  //           console.log('response from the signup ' , response);
-  //           this.setState({
-  //             text: ''
-  //           })
-  //         });
-  //  }
 
 
     saveFileClick(e){
@@ -205,7 +191,7 @@ class EditorControls extends Component {
   return (
     <div style={styles.base}>
       <Button
-        label={'START'}
+        label={'Start Program'}
         style={styles.button}
         icon={<ActionAndroid />}
         onClick={this.props.runCode}
@@ -308,14 +294,14 @@ class EditorControls extends Component {
 
 
       <Button
-        label={"DEMO"}
+        label={"How to use this Kiwi Editor"}
         style={styles.button}
         onClick={this.props.runIntro}
         dataIntro={introDemo}
         dataStep={6}
       />
       <Button
-        label={"Tips & Tricks"}
+        label={"Basic Tips"}
         style={styles.button}
         onClick={this.props.showResources}
         dataIntro={introResources}
