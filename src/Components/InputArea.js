@@ -19,13 +19,16 @@ const options = {
   mode: 'python'
 };
 
+const style = {
+  color: 'yellow'
+}
+
 class InputArea extends React.Component {
-  componentWillReceiveProps() {
-    if (this.props.errorLine > -1) {
-      // TODO add highlighting to line with error
-      // this.refs.editor.codeMirror.addLineClass(this.props.errorLine, 'wrap', 'some-class');
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errorLine) {
+      this.refs.editor.codeMirror.addLineClass((nextProps.errorLine - 1), 'wrap', 'error-highlight');
     } else {
-      // TODO clear error highlighting
+      this.refs.editor.codeMirror.addLineClass((this.props.errorLine - 1), 'wrap', 'error-fixed');
     }
   }
 
