@@ -5,15 +5,14 @@ import { Container } from 'react-grid-system';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
-import BottomNavigation from 'material-ui/BottomNavigation';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-import {kiwiGreen, kiwiLightGreen, kiwiPurple, kiwiLightPurple, kiwiBlue,
+import { kiwiGreen, kiwiLightGreen, kiwiPurple, kiwiLightPurple,
         kiwiDarkBlue, kiwiLightRed, kiwiWhite, kiwiYellow, kiwiLimeGreen,
-        kiwiPastel, kiwiLightBlue, kiwiDarkGreen} from './colors';
+        kiwiPastel, kiwiLightBlue, kiwiDarkGreen } from './colors';
 
 const main_theme = getMuiTheme({
   palette: {
@@ -42,7 +41,6 @@ const alt_theme2 = getMuiTheme({
   }
 });
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -69,16 +67,19 @@ class App extends Component {
     return (
       <MuiThemeProvider muiTheme={this.state.theme}>
         <div>
-          <Container fluid>
-            <CodeEditor />
-          </Container>
-          <AppBar showMenuIconButton={false}>
+          <AppBar
+            title="Kiwi Compute"
+            showMenuIconButton={false}
+          >
             <DropDownMenu value={this.state.themeValue} onChange={this.handleThemeChange}>
               <MenuItem value={1} primaryText="Kiwi" />
               <MenuItem value={2} primaryText="Midnight" />
               <MenuItem value={3} primaryText="Daylight" />
             </DropDownMenu>
           </AppBar>
+          <Container fluid>
+            <CodeEditor />
+          </Container>
         </div>
       </MuiThemeProvider>
     );
