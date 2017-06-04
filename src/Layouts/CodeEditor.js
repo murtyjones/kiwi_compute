@@ -8,6 +8,7 @@ import React from 'react';
 import skulpt from 'skulpt';
 import Header from '../Components/Header';
 import SkulptIO from '../Components/SkulptIO';
+import axios from 'axios';
 
 class CodeEditor extends React.Component {
   constructor(props) {
@@ -16,6 +17,9 @@ class CodeEditor extends React.Component {
       editorInput: '',
       editorOutput: '',
       errorMsg: '',
+      userId:'',
+      text:'',
+      retrieved:true
     };
   }
 
@@ -54,6 +58,38 @@ class CodeEditor extends React.Component {
     }
   }
 
+      saveText(e){
+      e.preventDefault();
+      // console.log('inside savetext and the value of this.state')
+      axios.post('http://localhost:5000/savetext',{
+        userId:  this.props.loginId,
+        text: this.state.editorInput
+      })
+        .then((response)=>{
+            console.log('response from the signup ' , response);
+            this.setState({
+              text: ''
+            })
+          });
+    }
+
+    retrieveText(e){
+      var self = this;
+      e.preventDefault();
+      axios.post('http://localhost:5000/retrieveText',{
+        userId: this.props.loginId,
+      })
+        .then((response)=>{
+          console.log('response from retrieveText is ', response);
+            if (response.data.returnTexts.length>0){
+              self.setState({
+                returnTexts: response.data.returnTexts,
+                retrieved: true
+              })
+            }
+          });
+    }
+
   render() {
     return (
       <div>
@@ -66,6 +102,10 @@ class CodeEditor extends React.Component {
           inputUpdate={this.handleEditorChange}
           errorMsg={this.state.errorMsg}
         />
+        <form>
+          <button onClick={(e)=>this.saveText(e)}>Save Code!</button>
+          <button onClick={(e)=>this.retrieveText(e)}>Retrieve Code!</button>
+        </form>
       </div>
     );
   }
