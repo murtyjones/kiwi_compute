@@ -12,20 +12,10 @@ import 'intro.js/introjs.css';
 import 'intro.js/themes/introjs-flattener.css';
 
 import EditorControls from '../Components/EditorControls';
-import ErrorMessage from '../Components/ErrorMessage';
 import InputArea from'../Components/InputArea';
 import OutputArea from '../Components/OutputArea';
 import Resources from '../Components/Resources';
-import {Tabs, Tab} from 'material-ui/Tabs';
-
-const styles = {
-  headline: {
-    fontSize: 24,
-    paddingTop: 16,
-    marginBottom: 12,
-    fontWeight: 400,
-  },
-};
+import { Tabs, Tab } from 'material-ui/Tabs';
 
 let codeOutput = '';
 

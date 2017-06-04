@@ -21,10 +21,11 @@ const options = {
 
 class InputArea extends React.Component {
   componentWillReceiveProps(nextProps) {
+    if (this.props.errorLine) {
+      this.refs.editor.codeMirror.removeLineClass((this.props.errorLine - 1), 'wrap', 'error-highlight');
+    }
     if (nextProps.errorLine) {
       this.refs.editor.codeMirror.addLineClass((nextProps.errorLine - 1), 'wrap', 'error-highlight');
-    } else {
-      this.refs.editor.codeMirror.addLineClass((this.props.errorLine - 1), 'wrap', 'error-fixed');
     }
   }
 
