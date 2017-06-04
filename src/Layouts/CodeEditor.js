@@ -84,7 +84,14 @@ class CodeEditor extends React.Component {
     const programToRun = this.state.editorInput;
     skulpt.canvas = "mycanvas";
     skulpt.pre = "output";
-    skulpt.configure({output:this.lineExecuteSuccess, read:this.builtinRead});
+    skulpt.configure({
+      inputfun: function (prompt) {
+        return window.prompt(prompt);
+      },
+      inputfunTakesPrompt: true,
+      output:this.lineExecuteSuccess,
+      read:this.builtinRead
+    });
     var myPromise = skulpt.misceval.asyncToPromise(function() {
       return skulpt.importMainWithBody("<stdin>", false, programToRun, true);
     });
