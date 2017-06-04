@@ -14,7 +14,8 @@ import 'intro.js/themes/introjs-flattener.css';
 import EditorControls from '../Components/EditorControls';
 import ErrorMessage from '../Components/ErrorMessage';
 import InputArea from'../Components/InputArea';
-import OutputArea  from '../Components/OutputArea';
+import OutputArea from '../Components/OutputArea';
+import Resources from '../Components/Resources';
 
 let codeOutput = '';
 
@@ -26,6 +27,7 @@ class CodeEditor extends React.Component {
       editorOutput: '',
       errorMsg: '',
       errorLine: null,
+      isResourcesShowing: false,
     };
   }
 
@@ -74,15 +76,26 @@ class CodeEditor extends React.Component {
     introJs().start();
   }
 
+  toggleResources = () => {
+    this.setState({
+      isResourcesShowing: !this.state.isResourcesShowing,
+    });
+  }
+
   render() {
-    const { editorInput, editorOutput, errorMsg, errorLine } = this.state;
+    const { editorInput, editorOutput, errorMsg, errorLine, isResourcesShowing } = this.state;
     return (
       <div>
+        <Resources
+          show={isResourcesShowing}
+          hide={this.toggleResources}
+        />
         <Row>
           <Col md={12}>
             <EditorControls
               runCode={this.runCode}
               runIntro={this.runIntro}
+              showResources={this.toggleResources}
             />
           </Col>
           <Col md={6}>
