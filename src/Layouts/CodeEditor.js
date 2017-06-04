@@ -16,6 +16,7 @@ import ErrorMessage from '../Components/ErrorMessage';
 import InputArea from'../Components/InputArea';
 import OutputArea from '../Components/OutputArea';
 import Resources from '../Components/Resources';
+import renderIf from 'render-if';
 
 let codeOutput = '';
 
@@ -25,11 +26,35 @@ class CodeEditor extends React.Component {
     this.state = {
       editorInput: 'print "Test"',
       editorOutput: '',
+      forceUpdateval: false,
       errorMsg: '',
       errorLine: null,
       isResourcesShowing: false,
+      changeInput: false
     };
   }
+
+
+  forceUPdatefunc(){
+    console.log('inside forceUPdatefunc in the codeEditor');
+    var savetext = localStorage.getItem('retrievedText');
+    if (savetext){
+      this.setState({
+        editorInput: savetext,
+        changeInput: true
+      }
+      , () =>{
+        // this.forceUpdate();
+        localStorage.removeItem('retrievedText');
+        setTimeout(()=>{
+          this.setState({
+            changeInput: false
+          })
+        }, 1000)
+      });
+    }
+  }
+
 
   handleEditorChange = (value) => {
     this.setState({ editorInput: value });
@@ -86,6 +111,8 @@ class CodeEditor extends React.Component {
   render() {
     const { editorInput, editorOutput, errorMsg, errorLine, isResourcesShowing } = this.state;
     // console.log("editorInput inside CodeEditor is .... ",  editorInput);
+    console.log('inisde CodeEditor ', this.state.editorInput)
+
     return (
       <div>
         <Resources
@@ -96,17 +123,27 @@ class CodeEditor extends React.Component {
           <Col md={12}>
             <EditorControls
               runCode={this.runCode}
+              forceUPdatefunc = {this.forceUPdatefunc.bind(this)}
               editorInput={editorInput}
               runIntro={this.runIntro}
               showResources={this.toggleResources}
             />
           </Col>
           <Col md={6}>
+          {renderIf(this.state.changeInput===false)(
             <InputArea
               editorInput={editorInput}
               updateInput={this.handleEditorChange}
               errorLine={errorLine}
             />
+          )}
+          {renderIf(this.state.changeInput===true)(
+            <InputArea
+              editorInput={editorInput}
+              errorLine={errorLine}
+            />
+          )}
+
           </Col>
           <Col md={6}>
             <OutputArea

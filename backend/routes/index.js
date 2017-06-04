@@ -179,7 +179,8 @@ router.post('/savetext', function(req,res,next){
       var postid = post._id;
       var newText = new TextSave({
           postid: postid,
-          text: req.body.text
+          text: req.body.text,
+					name: req.body.name
       });
       newText.save(function(err, post){
         if(err){
@@ -211,7 +212,8 @@ router.post('/retrievetext', function(req,res,next){
           console.log('***********************************************************************************************************');
           if(post.postid==postid){
             console.log('inside the postid=postid');
-            returnTexts.push(post.text);
+						var tempObj = {"name": post.name, "text": post.text}
+            returnTexts.push(tempObj);
           }
           if(loopcounter===(postslength-1)){
             resolve(true);

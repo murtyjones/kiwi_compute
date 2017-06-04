@@ -7,9 +7,12 @@
 import React, { Component } from 'react';
 import Button from './Button';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
+import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import renderIf from 'render-if';
 import axios from 'axios';
+import {List, ListItem} from 'material-ui/List';
+// import ReturnText from 'ReturnText';
 
 
 import { introStart, introSave, introDemo, introResources } from '../intro';
@@ -35,8 +38,12 @@ class EditorControls extends Component {
     loggedIn: false,
     loginId: '',
     signedUp: '',
+    returnTexts: '',
+    retrieved: false,
     saveForm: false,
-    saveButton: false
+    saveButton: false,
+    modalSave: false,
+    filename: ""
   }
 }
 
@@ -102,31 +109,99 @@ class EditorControls extends Component {
         });
    }
 
+  //  saveFileClick(e){
+  //    e.preventDefault();
+  //    console.log("this.props.editorInput is ", this.props.editorInput);
+  //    axios.post('http://localhost:5000/savetext',{
+  //       userId:  this.state.loginId,
+  //       text: this.props.editorInput
+  //     })
+  //       .then((response)=>{
+  //           console.log('response from the signup ' , response);
+  //           this.setState({
+  //             text: ''
+  //           })
+  //         });
+  //  }
 
 
-
-   saveFileClick(e){
-     e.preventDefault();
-     console.log("this.props.editorInput is ", this.props.editorInput);
-     axios.post('http://localhost:5000/savetext',{
-        userId:  this.state.loginId,
-        text: this.props.editorInput
+    saveFileClick(e){
+      e.preventDefault();
+      this.setState({
+        modalSave: true
       })
-        .then((response)=>{
-            console.log('response from the signup ' , response);
-            this.setState({
-              text: ''
-            })
-          });
-   }
+    }
+
+
+    filenameClick(e){
+      e.preventDefault();
+         console.log("this.props.editorInput is ", this.props.editorInput);
+         axios.post('http://localhost:5000/savetext',{
+            userId:  this.state.loginId,
+            text: this.props.editorInput,
+            name: this.state.filename
+          })
+            .then((response)=>{
+                console.log('response from the signup ' , response);
+                this.setState({
+                  text: '',
+                  modalSave: false
+                })
+              });
+    }
 
 
    openFileClick(e){
      e.preventDefault();
+     var self = this;
+
+    axios.post('http://localhost:5000/retrieveText',{
+      userId: this.state.loginId,
+    })
+      .then((response)=>{
+        console.log('response from retrieveText is ', response);
+          if (response.data.returnTexts.length>0){
+            self.setState({
+              returnTexts: response.data.returnTexts,
+              retrieved: true
+            }, ()=>{console.log('returnTexts is ', this.state.returnTexts)});
+          }
+        });
    }
+
+   //
+  //  loadRetreivedText(){
+  //
+  //  }
+
+
+  listClick(text){
+
+    console.log('inside listClick and the value of text is ', text);
+
+    localStorage.setItem('retrievedText', text);
+
+    this.props.forceUPdatefunc();
+
+    this.setState({
+      retrieved: false
+    })
+  }
 
 
   render(){
+
+    let listSavedFiles;
+
+              if(this.state.retrieved===true){
+                    listSavedFiles = this.state.returnTexts.map((file,i) => {
+                      return (
+                        <ListItem primaryText={file.name} onClick={()=>{this.listClick(file.text)}} />
+                      );
+                    });
+              }
+
+
   return (
     <div style={styles.base}>
       <Button
@@ -196,6 +271,38 @@ class EditorControls extends Component {
          />
          </div>
       )}
+
+
+      <Dialog
+        title="Save your file"
+        open={this.state.modalSave}
+        modal={true}>
+
+        <TextField
+            hintText="Enter Filename"
+            floatingLabelText="Filename"
+            onChange={(e)=>this.setState({filename: e.target.value })}
+        />
+         <Button
+           label={"SAVE FILE"}
+           style={styles.button}
+           dataIntro={introSave}
+           dataStep={4}
+           onClick={(e)=>{this.filenameClick(e)}}
+         />
+
+      </Dialog>
+
+      <Dialog
+        title="Retrieve Files"
+        open={this.state.retrieved}
+        modal={true}>
+
+        <List>
+          {listSavedFiles}
+        </List>
+
+      </Dialog>
 
 
 
