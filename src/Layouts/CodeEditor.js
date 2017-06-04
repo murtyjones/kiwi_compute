@@ -6,8 +6,12 @@
 
 import React from 'react';
 import skulpt from 'skulpt';
-import Header from '../Components/Header';
-import SkulptIO from '../Components/SkulptIO';
+import { Row, Col } from 'react-grid-system';
+
+import EditorControls from '../Components/EditorControls';
+import ErrorMessage from '../Components/ErrorMessage';
+import InputArea from'../Components/InputArea';
+import OutputArea  from '../Components/OutputArea';
 
 class CodeEditor extends React.Component {
   constructor(props) {
@@ -20,22 +24,21 @@ class CodeEditor extends React.Component {
   }
 
   handleEditorChange = (value) => {
-    this.setState({editorInput: value});
+    console.log(value);
+    this.setState({ editorInput: value });
   }
 
-  codeRunSuccess = (text) => {
-    if (text.length > 1) {
-      this.setState({
-        editorOutput: text,
-        errorMsg: '',
-      });
-    }
+  lineExecuteSuccess = (text) => {
+    this.setState({
+      editorOutput: this.state.editorOutput + text,
+    });
   }
 
   builtinRead = (x) => {
     if (skulpt.builtinFiles === undefined || skulpt.builtinFiles["files"][x] === undefined)
-      // eslint-disable-next-line
-      throw "File not found: '" + x + "'";
+      this.setState({
+        errorMsg: 'Something Went Wrong! Please Refresh!',
+      });
     return skulpt.builtinFiles["files"][x];
   }
 
@@ -43,31 +46,59 @@ class CodeEditor extends React.Component {
     const programToRun = this.state.editorInput;
     skulpt.canvas = "mycanvas";
     skulpt.pre = "output";
-    skulpt.configure({output:this.codeRunSuccess, read:this.builtinRead});
-    try {
-      // eslint-disable-next-line
-      eval(skulpt.importMainWithBody("<stdin>", false, programToRun));
-    }
-    catch(e) {
+    skulpt.configure({output:this.lineExecuteSuccess, read:this.builtinRead});
+    // try {
+    //   // eslint-disable-next-line
+    //   eval(skulpt.importMainWithBody("<stdin>", false, programToRun));
+    // }
+    // catch(e) {
+    //   this.setState({
+    //     errorMsg: e.toString(),
+    //     editorOutput: '',
+    //   });
+    // }
+
+    var myPromise = skulpt.misceval.asyncToPromise(function() {
+      return skulpt.importMainWithBody("<stdin>", false, programToRun, true);
+    });
+    myPromise.then(() => {
+      this.setState({
+        errorMsg: '',
+      });
+    }, (e) => {
+      console.log('Error!', e);
       this.setState({
         errorMsg: e.toString(),
         editorOutput: '',
       });
-    }
+    });
   }
 
   render() {
+    const { editorInput, editorOutput, errorMsg } = this.state;
     return (
       <div>
-        <Header
-          runCode={this.runCode}
-        />
-        <SkulptIO
-          editorInput={this.state.editorInput}
-          editorOutput={this.state.editorOutput}
-          inputUpdate={this.handleEditorChange}
-          errorMsg={this.state.errorMsg}
-        />
+        <Row>
+          <Col md={12}>
+            <EditorControls
+              runCode={this.runCode}
+            />
+          </Col>
+          <Col md={12}>
+            <ErrorMessage errorMsg={errorMsg} />
+          </Col>
+          <Col md={6}>
+            <InputArea
+              editorInput={editorInput}
+              updateInput={this.handleEditorChange}
+            />
+          </Col>
+          <Col md={6}>
+            <OutputArea
+              editorOutput={editorOutput}
+            />
+          </Col>
+        </Row>
       </div>
     );
   }
