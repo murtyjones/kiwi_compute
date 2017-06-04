@@ -7,6 +7,8 @@
 import React from 'react';
 import skulpt from 'skulpt';
 import { Row, Col } from 'react-grid-system';
+import { introJs } from 'intro.js';
+import 'intro.js/introjs.css'
 
 import EditorControls from '../Components/EditorControls';
 import ErrorMessage from '../Components/ErrorMessage';
@@ -67,6 +69,10 @@ class CodeEditor extends React.Component {
     });
   }
 
+  runIntro = () => {
+    introJs().start();
+  }
+
   render() {
     const { editorInput, editorOutput, errorMsg, errorLine } = this.state;
     return (
@@ -75,6 +81,7 @@ class CodeEditor extends React.Component {
           <Col md={12}>
             <EditorControls
               runCode={this.runCode}
+              runIntro={this.runIntro}
             />
           </Col>
           <Col md={12}>
