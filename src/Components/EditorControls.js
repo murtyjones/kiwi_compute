@@ -104,6 +104,28 @@ class EditorControls extends Component {
 
 
 
+
+   saveFileClick(e){
+     e.preventDefault();
+     console.log("this.props.editorInput is ", this.props.editorInput);
+     axios.post('http://localhost:5000/savetext',{
+        userId:  this.state.loginId,
+        text: this.props.editorInput
+      })
+        .then((response)=>{
+            console.log('response from the signup ' , response);
+            this.setState({
+              text: ''
+            })
+          });
+   }
+
+
+   openFileClick(e){
+     e.preventDefault();
+   }
+
+
   render(){
   return (
     <div style={styles.base}>
@@ -158,29 +180,19 @@ class EditorControls extends Component {
 
       {renderIf(this.state.saveButton===true)(
         <div>
-        <TextField
-            hintText="Enter Username"
-            floatingLabelText="Username"
-            onChange={(e)=>this.setState({username: e.target.value })}
-        />
-        <TextField
-           hintText="Enter Password"
-           floatingLabelText="Password"
-           onChange={(e)=>this.setState({password: e.target.value })}
-         />
          <Button
-           label={"LOGIN"}
+           label={"SAVE"}
            style={styles.button}
            dataIntro={introSave}
            dataStep={4}
-           onClick={(e)=>{this.loginClick(e)}}
+           onClick={(e)=>{this.saveFileClick(e)}}
          />
          <Button
-           label={"SIGNUP"}
+           label={"OPEN"}
            style={styles.button}
            dataIntro={introSave}
            dataStep={4}
-           onClick={(e)=>{this.signupClick(e)}}
+           onClick={(e)=>{this.openFileClick(e)}}
          />
          </div>
       )}

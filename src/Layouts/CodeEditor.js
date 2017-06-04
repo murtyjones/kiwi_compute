@@ -84,6 +84,7 @@ class CodeEditor extends React.Component {
 
   render() {
     const { editorInput, editorOutput, errorMsg, errorLine, isResourcesShowing } = this.state;
+    // console.log("editorInput inside CodeEditor is .... ",  editorInput);
     return (
       <div>
         <Resources
@@ -94,6 +95,7 @@ class CodeEditor extends React.Component {
           <Col md={12}>
             <EditorControls
               runCode={this.runCode}
+              editorInput={editorInput}
               runIntro={this.runIntro}
               showResources={this.toggleResources}
             />
