@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import CodeEditor from './Layouts/CodeEditor';
+import { Container } from 'react-grid-system';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
+import BottomNavigation from 'material-ui/BottomNavigation';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import axios from 'axios';
 import renderIf from 'render-if';
@@ -45,7 +50,9 @@ class App extends Component {
       username: '',
       password: '',
       loggedIn: false,
-      loginId: ''
+      loginId: '',
+      themeValue: 1,
+      theme: main_theme
     }
   }
 
@@ -101,6 +108,23 @@ class App extends Component {
       });
   }
 
+  handleThemeChange = (event, index, value) => {
+  switch (value) {
+    case 1:
+      this.setState({themeValue:1, theme: main_theme})
+      break;
+    case 2:
+      this.setState({themeValue:2, theme: alt_theme1})
+      break;
+    case 3:
+      this.setState({themeValue:3, theme: alt_theme2})
+      break;
+    default:
+      this.setState({themeValue:1, theme: main_theme})
+  }
+  this.setState({value});
+}
+
   render() {
     return (
       <MuiThemeProvider muiTheme={main_theme}>
@@ -123,7 +147,18 @@ class App extends Component {
         </form>
 
         {renderIf(this.state.loggedIn === true)(
-          <CodeEditor loginId={this.state.loginId}/>
+          <div>
+            <Container fluid>
+              <CodeEditor  loginId={this.state.loginId}/>
+            </Container>
+            <AppBar showMenuIconButton={false}>
+              <DropDownMenu value={this.state.themeValue} onChange={this.handleThemeChange}>
+                <MenuItem value={1} primaryText="Kiwi" />
+                <MenuItem value={2} primaryText="Midnight" />
+                <MenuItem value={3} primaryText="Daylight" />
+              </DropDownMenu>
+            </AppBar>
+          </div>
         )}
         {renderIf(this.state.loggedIn === false)(
           <p>please log in to get to the code editor!</p>

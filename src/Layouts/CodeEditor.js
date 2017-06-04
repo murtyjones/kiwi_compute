@@ -23,8 +23,8 @@ class CodeEditor extends React.Component {
     };
   }
 
-  handleEditorChange = (event) => {
-    this.setState({editorInput: event.target.value});
+  handleEditorChange = (value) => {
+    this.setState({editorInput: value});
   }
 
   codeRunSuccess = (text) => {
@@ -38,9 +38,11 @@ class CodeEditor extends React.Component {
 
   builtinRead = (x) => {
     if (skulpt.builtinFiles === undefined || skulpt.builtinFiles["files"][x] === undefined)
+      // eslint-disable-next-line
       throw "File not found: '" + x + "'";
     return skulpt.builtinFiles["files"][x];
   }
+
 
   runCode = () => {
     const programToRun = this.state.editorInput;
@@ -48,6 +50,7 @@ class CodeEditor extends React.Component {
     skulpt.pre = "output";
     skulpt.configure({output:this.codeRunSuccess, read:this.builtinRead});
     try {
+      // eslint-disable-next-line
       eval(skulpt.importMainWithBody("<stdin>", false, programToRun));
     }
     catch(e) {
@@ -58,9 +61,9 @@ class CodeEditor extends React.Component {
     }
   }
 
-      saveText(e){
+      saveText=(e)=>{
       e.preventDefault();
-      // console.log('inside savetext and the value of this.state')
+      console.log('inside savetext and the value of this.state.editorInput is ', this.state.editorInput);
       axios.post('http://localhost:5000/savetext',{
         userId:  this.props.loginId,
         text: this.state.editorInput
