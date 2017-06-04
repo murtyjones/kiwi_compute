@@ -7,6 +7,7 @@
 import React from 'react';
 import CodeMirror from 'react-codemirror';
 import 'codemirror/lib/codemirror.css';
+import 'codemirror/mode/python/python';
 import '../assets/css/codeMirrorOverrides.css';
 
 const options = {

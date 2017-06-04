@@ -13,25 +13,24 @@ import ErrorMessage from '../Components/ErrorMessage';
 import InputArea from'../Components/InputArea';
 import OutputArea  from '../Components/OutputArea';
 
+let codeOutput = '';
+
 class CodeEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorInput: '',
+      editorInput: 'print "Test"',
       editorOutput: '',
       errorMsg: '',
     };
   }
 
   handleEditorChange = (value) => {
-    console.log(value);
     this.setState({ editorInput: value });
   }
 
   lineExecuteSuccess = (text) => {
-    this.setState({
-      editorOutput: this.state.editorOutput + text,
-    });
+    codeOutput = codeOutput + text;
   }
 
   builtinRead = (x) => {
@@ -47,22 +46,12 @@ class CodeEditor extends React.Component {
     skulpt.canvas = "mycanvas";
     skulpt.pre = "output";
     skulpt.configure({output:this.lineExecuteSuccess, read:this.builtinRead});
-    // try {
-    //   // eslint-disable-next-line
-    //   eval(skulpt.importMainWithBody("<stdin>", false, programToRun));
-    // }
-    // catch(e) {
-    //   this.setState({
-    //     errorMsg: e.toString(),
-    //     editorOutput: '',
-    //   });
-    // }
-
     var myPromise = skulpt.misceval.asyncToPromise(function() {
       return skulpt.importMainWithBody("<stdin>", false, programToRun, true);
     });
     myPromise.then(() => {
       this.setState({
+        editorOutput: codeOutput,
         errorMsg: '',
       });
     }, (e) => {
