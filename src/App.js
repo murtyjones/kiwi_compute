@@ -51,16 +51,16 @@ class App extends Component {
   handleThemeChange = (event, index, value) => {
     switch (value) {
       case 1:
-        this.setState({value:1, theme: main_theme})
+        this.setState({themeValue:1, theme: main_theme})
         break;
       case 2:
-        this.setState({value:1, theme: alt_theme1})
+        this.setState({themeValue:2, theme: alt_theme1})
         break;
       case 3:
-        this.setState({value:1, theme: alt_theme2})
+        this.setState({themeValue:3, theme: alt_theme2})
         break;
       default:
-        this.setState({value:1, theme: main_theme})
+        this.setState({themeValue:1, theme: main_theme})
     }
     this.setState({value});
   }
@@ -69,12 +69,6 @@ class App extends Component {
     return (
       <MuiThemeProvider muiTheme={this.state.theme}>
         <div>
-          <div>
-            <AppBar
-              title="Kiwi Compute"
-              showMenuIconButton={false}
-            />
-          </div>
           <Container fluid>
             <CodeEditor />
           </Container>
