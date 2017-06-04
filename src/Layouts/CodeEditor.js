@@ -82,7 +82,6 @@ class CodeEditor extends React.Component {
       });
       codeOutput = '';
     }, (e) => {
-      console.log('Error!', e);
       this.setState({
         errorMsg: e.toString(),
         errorLine: e.traceback[0].lineno,
@@ -104,10 +103,10 @@ class CodeEditor extends React.Component {
   }
 
   render() {
-    const { editorInput, editorOutput, errorMsg, errorLine, isResourcesShowing } = this.state;
+    const { editorInput, editorOutput, errorMsg, errorLine, isResourcesShowing, tabFocus } = this.state;
 
-    const inputLabel = this.state.tabFocus === 'input' ? 'Enter your Python code on here.' : '';
-    const outputLabel = this.state.tabFocus === 'input' ? '' : 'Check out the results of your Python code here.';
+    const inputLabel = this.state.tabFocus === 'input' ? "Enter your Python code on here, then click 'START'" : '';
+    const outputLabel = this.state.tabFocus === 'output' ? 'Check out the results of your Python code here.' : '';
 
     return (
       <div>
@@ -125,7 +124,7 @@ class CodeEditor extends React.Component {
           </Col>
           <Col md={12}>
             <Tabs
-              value={this.state.tabFocus}
+              value={tabFocus}
               onChange={this.handleChange}
             >
                <Tab label={inputLabel} value="input">
