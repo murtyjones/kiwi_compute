@@ -54,6 +54,7 @@ You can, however, create more top-level directories.<br>
 They will not be included in the production build so you can use them for things like documentation.
 
 ## Available Scripts
+### FrontEnd
 
 In the project directory, you can run:
 
@@ -90,6 +91,13 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
+### Backend
+To run the backend code, open another terminal tab and run
+
+### `yarn`
+### `cd backend`
+### `npm start`
+
 ### Tech
 * [Node.JS](http://nodejs.org) - evented I/O for the backend
 * [Skulpt](http://www.skulpt.org/) - Javascript implementation of the Python programming language
@@ -119,7 +127,7 @@ $ npm start
 ### User Stories
 
  - Need
-    -  Build UI Team 
+    -  Build UI Team
  - Want
     -
  - Wish

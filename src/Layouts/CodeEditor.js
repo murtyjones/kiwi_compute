@@ -15,6 +15,7 @@ import EditorControls from '../Components/EditorControls';
 import InputArea from'../Components/InputArea';
 import OutputArea from '../Components/OutputArea';
 import Resources from '../Components/Resources';
+import renderIf from 'render-if';
 import { Tabs, Tab } from 'material-ui/Tabs';
 
 let codeOutput = '';
@@ -25,12 +26,41 @@ class CodeEditor extends React.Component {
     this.state = {
       editorInput: 'print "Write Your Code Here"',
       editorOutput: '',
+      forceUpdateval: false,
       errorMsg: '',
       errorLine: null,
       isResourcesShowing: false,
+      changeInput: false,
       tabFocus: 'input'
     };
   }
+
+  componentDidMount() {
+    if (window.location.pathname === '/tutorial') {
+      this.runIntro();
+    }
+  }
+
+  forceUPdatefunc(){
+    console.log('inside forceUPdatefunc in the codeEditor');
+    var savetext = localStorage.getItem('retrievedText');
+    if (savetext){
+      this.setState({
+        editorInput: savetext,
+        changeInput: true
+      }
+      , () =>{
+        // this.forceUpdate();
+        localStorage.removeItem('retrievedText');
+        setTimeout(()=>{
+          this.setState({
+            changeInput: false
+          })
+        }, 1000)
+      });
+    }
+  }
+
 
   handleEditorChange = (value) => {
     this.setState({ editorInput: value });
@@ -59,7 +89,14 @@ class CodeEditor extends React.Component {
     const programToRun = this.state.editorInput;
     skulpt.canvas = "mycanvas";
     skulpt.pre = "output";
-    skulpt.configure({output:this.lineExecuteSuccess, read:this.builtinRead});
+    skulpt.configure({
+      inputfun: function (prompt) {
+        return window.prompt(prompt);
+      },
+      inputfunTakesPrompt: true,
+      output:this.lineExecuteSuccess,
+      read:this.builtinRead
+    });
     var myPromise = skulpt.misceval.asyncToPromise(function() {
       return skulpt.importMainWithBody("<stdin>", false, programToRun, true);
     });
@@ -93,6 +130,7 @@ class CodeEditor extends React.Component {
   }
 
   render() {
+
     const { editorInput, editorOutput, errorMsg, errorLine, isResourcesShowing, tabFocus } = this.state;
 
     const inputLabel = this.state.tabFocus === 'input' ? "Enter your Python code on here, then click 'START'" : '';
@@ -108,6 +146,8 @@ class CodeEditor extends React.Component {
           <Col md={12}>
             <EditorControls
               runCode={this.runCode}
+              forceUPdatefunc = {this.forceUPdatefunc.bind(this)}
+              editorInput={editorInput}
               runIntro={this.runIntro}
               showResources={this.toggleResources}
             />
@@ -122,20 +162,29 @@ class CodeEditor extends React.Component {
                <Tab label={outputLabel} value="output">
                </Tab>
               </Tabs>
-              <Col md={6}>
-                <InputArea
-                  editorInput={editorInput}
-                  updateFocus={this.handleFocusChange}
-                  updateInput={this.handleEditorChange}
-                  errorLine={errorLine}
-                />
-              </Col>
-              <Col md={6}>
-                <OutputArea
-                  editorOutput={editorOutput}
-                  errorMsg={errorMsg}
-                />
-              </Col>
+          <Col md={6}>
+          {renderIf(this.state.changeInput===false)(
+            <InputArea
+              editorInput={editorInput}
+              updateFocus={this.handleFocusChange}
+              updateInput={this.handleEditorChange}
+              errorLine={errorLine}
+            />
+          )}
+          {renderIf(this.state.changeInput===true)(
+            <InputArea
+              editorInput={editorInput}
+              errorLine={errorLine}
+            />
+          )}
+
+          </Col>
+          <Col md={6}>
+            <OutputArea
+              editorOutput={editorOutput}
+              errorMsg={errorMsg}
+            />
+        </Col>
           </Col>
         </Row>
       </div>

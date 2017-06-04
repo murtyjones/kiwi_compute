@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.16.2",
     "codemirror": "^5.26.0",
     "intro.js": "^2.5.0",
     "material-ui": "^0.18.1",
@@ -11,6 +12,7 @@
     "react-dom": "^15.5.4",
     "react-grid-system": "^2.9.2",
     "react-tap-event-plugin": "^2.0.1",
+    "render-if": "^0.1.1",
     "skulpt": "^0.11.1"
   },
   "devDependencies": {
