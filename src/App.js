@@ -77,7 +77,6 @@ class App extends Component {
     }
 
     return (
-      <div>
       <MuiThemeProvider muiTheme={this.state.theme}>
         <div>
           <AppBar
@@ -104,7 +103,6 @@ class App extends Component {
           </Container>
         </div>
       </MuiThemeProvider>
-    </div>
     );
   }
 }
