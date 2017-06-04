@@ -3,31 +3,18 @@ import CodeMirror from 'react-codemirror';
 import TextField from 'material-ui/TextField';
 import 'codemirror/lib/codemirror.css';
 
+const options = {
+  lineNumbers: true,
+  mode: 'python'
+};
+
 class InputArea extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      code: ''
-    };
-  }
-
-  updateCode = (newCode) => {
-    this.setState({
-      code: newCode
-    });
-  }
-
   render() {
-    const options = {
-      lineNumbers: true,
-      mode: 'python'
-    };
-
     return (
       <CodeMirror
         ref="editor"
-        value={this.state.code}
-        onChange={this.updateCode}
+        value={this.props.editorInput}
+        onChange={this.props.inputUpdate}
         options={options}
       />
     )
