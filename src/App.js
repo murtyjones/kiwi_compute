@@ -19,15 +19,18 @@ const main_theme = getMuiTheme({
     primary1Color: kiwiGreen,
     primary2Color: kiwiLightPurple,
     accent1Color: kiwiPurple,
-    accent2Color: kiwiLightGreen
-  }
+    accent2Color: kiwiLightGreen,
+    textColor: kiwiLightPurple,
+    alternateTextColor: kiwiLightPurple,
+    canvasColor: kiwiPurple
+    }
 });
 
 const alt_theme1 = getMuiTheme({
   palette: {
     primary1Color: kiwiDarkBlue,
-    primary2Color: kiwiLightRed,
-    accent1Color: kiwiWhite,
+    primary2Color: kiwiWhite,
+    accent1Color: kiwiLightRed,
     accent2Color: kiwiYellow
   }
 });

@@ -6,7 +6,6 @@
 
 import React from 'react';
 import Button from './Button';
-import ActionAndroid from 'material-ui/svg-icons/action/android';
 
 import { introStart, introSave, introDemo, introResources } from '../intro';
 
@@ -27,6 +26,7 @@ function EditorControls(props) {
       <Button
         label={'Start Program'}
         style={styles.button}
+        secondary={true}
         onClick={runCode}
         dataIntro={introStart}
         dataStep={2}
@@ -34,12 +34,14 @@ function EditorControls(props) {
       <Button
         label={"Save Your Code"}
         style={styles.button}
+        secondary={true}
         dataIntro={introSave}
         dataStep={4}
       />
       <Button
         label={"How to use this Kiwi Editor"}
         style={styles.button}
+        secondary={true}
         onClick={runIntro}
         dataIntro={introDemo}
         dataStep={6}
@@ -47,6 +49,7 @@ function EditorControls(props) {
       <Button
         label={"Basic Tips"}
         style={styles.button}
+        secondary={true}
         onClick={showResources}
         dataIntro={introResources}
         dataStep={5}
