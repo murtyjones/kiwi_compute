@@ -35,6 +35,21 @@ function Resources(props) {
   const mid = resources.length / 2;
   const leftCol = resources.slice(0, mid);
   const rightCol = resources.slice(mid, len);
+
+  const getResourceTitle = (resource) => {
+    return resource.title
+  }
+
+  const getResourceCodeOrURL = (resource) => {
+    if(resource.code){
+      return resource.code
+    } else if(resource.url) {
+      return (
+        <a href = {resource.url} target="_blank">{resource.title}</a>
+      )
+    }
+  }
+
   return (
     <Dialog
       title="Python Resources!"
@@ -71,12 +86,12 @@ function Resources(props) {
               return (
                 <Card style={styles.cards}>
                   <CardHeader
-                    title={resource.title}
+                    title={getResourceTitle(resource)}
                     subtitle={resource.description}
                   />
                   <CardText>
                     <pre>
-                      {resource.code}
+                      {getResourceCodeOrURL(resource)}
                     </pre>
                   </CardText>
                 </Card>
