@@ -154,6 +154,7 @@ class CodeEditor extends React.Component {
           {renderIf(this.state.changeInput===false)(
             <InputArea
               editorInput={editorInput}
+              updateFocus={this.handleFocusChange}
               updateInput={this.handleEditorChange}
               errorLine={errorLine}
             />
