@@ -7,17 +7,15 @@
 import React from 'react';
 import CodeMirror from 'react-codemirror';
 import 'codemirror/lib/codemirror.css';
-import 'codemirror/mode/python/python';
+import 'codemirror/mode/javascript/javascript';
+import 'codemirror/addon/hint/show-hint';
+import 'codemirror/addon/hint/javascript-hint';
+import 'codemirror/addon/hint/show-hint.css';
 import '../assets/css/codeMirrorOverrides.css';
 import { Card } from 'material-ui';
 
 import { introEditorInput } from '../intro';
 
-const options = {
-  lineNumbers: true,
-  lineWrapping: true,
-  mode: 'python'
-};
 
 class InputArea extends React.Component {
   componentWillReceiveProps() {
@@ -29,8 +27,24 @@ class InputArea extends React.Component {
     }
   }
 
+  autoComplete = cm => {
+    console.log(this.refs);
+    const codeMirror = this.refs.editor.getCodeMirrorInstance();
+    codeMirror.showHint(cm, codeMirror.hint.javascript);
+  }
+
   render() {
+    const options = {
+      lineNumbers: true,
+      lineWrapping: true,
+      mode: 'text/x-javascript',
+      extraKeys: {
+        'Ctrl-Space': this.autoComplete
+      }
+    };
+
     const { editorInput, updateInput } = this.props;
+    
     return (
       <Card
         data-intro={introEditorInput}
