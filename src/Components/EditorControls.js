@@ -216,6 +216,7 @@ class EditorControls extends Component {
             onChange={(e)=>this.setState({username: e.target.value })}
         />
         <TextField
+           type="password"
            hintText="Enter Password"
            floatingLabelText="Password"
            onChange={(e)=>this.setState({password: e.target.value })}
