@@ -19,15 +19,15 @@ class InputArea extends React.Component {
 
   render() {
     const options = {
-      lineNumbers: true, 
+      lineNumbers: true,
       mode: 'python'
     };
 
     return (
-      <CodeMirror 
+      <CodeMirror
         ref="editor"
-        value={this.state.code} 
-        onChange={this.updateCode} 
+        value={this.state.code}
+        onChange={this.updateCode}
         options={options}
       />
     )
