@@ -29,7 +29,7 @@ class InputArea extends React.Component {
   }
 
   render() {
-    const { editorInput, updateInput } = this.props;
+    const { editorInput, updateFocus, updateInput } = this.props;
     return (
       <Card
         data-intro={introEditorInput}
@@ -39,6 +39,7 @@ class InputArea extends React.Component {
           ref="editor"
           value={editorInput}
           onChange={updateInput}
+          onFocusChange={updateFocus}
           options={options}
         />
       </Card>
