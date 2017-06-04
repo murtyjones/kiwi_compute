@@ -6,7 +6,6 @@
 
 import React from 'react';
 import Button from './Button';
-import ActionAndroid from 'material-ui/svg-icons/action/android';
 
 import { introStart, introSave, introDemo, introResources } from '../intro';
 
