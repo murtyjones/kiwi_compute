@@ -24,6 +24,7 @@ function OutputArea(props) {
         style={styles.base}
         data-intro={introEditorOutput}
         data-step={3}
+        data-position={'auto'}
       >
         <CardText>
           <pre>
