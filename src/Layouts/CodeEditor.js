@@ -35,6 +35,11 @@ class CodeEditor extends React.Component {
     };
   }
 
+  componentDidMount() {
+    if (window.location.pathname === '/tutorial') {
+      this.runIntro();
+    }
+  }
 
   forceUPdatefunc(){
     console.log('inside forceUPdatefunc in the codeEditor');
