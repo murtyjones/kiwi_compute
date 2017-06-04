@@ -57,6 +57,7 @@ class InputArea extends React.Component {
       <Card
         data-intro={introEditorInput}
         data-step={1}
+        data-position={'auto'}
       >
         <CodeMirror
           ref="editor"
