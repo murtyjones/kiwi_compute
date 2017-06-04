@@ -43,14 +43,14 @@ function EditorControls(props) {
         style={styles.button}
         onClick={runIntro}
         dataIntro={introDemo}
-        dataStep={5}
+        dataStep={6}
       />
       <Button
         label={"Tips & Tricks"}
         style={styles.button}
         onClick={showResources}
         dataIntro={introResources}
-        dataStep={6}
+        dataStep={5}
       />
     </div>
   )
