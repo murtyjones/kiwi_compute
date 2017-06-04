@@ -50,7 +50,7 @@ function Resources(props) {
           {
             leftCol.map((resource, index) => {
               return (
-                <Card style={styles.cards}>
+                <Card key={resource.title} style={styles.cards}>
                   <CardHeader
                     title={resource.title}
                     subtitle={resource.description}
@@ -69,7 +69,7 @@ function Resources(props) {
           {
             rightCol.map((resource, index) => {
               return (
-                <Card style={styles.cards}>
+                <Card key={resource.title} style={styles.cards}>
                   <CardHeader
                     title={resource.title}
                     subtitle={resource.description}
