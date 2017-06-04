@@ -13,6 +13,7 @@ import { introStart, introSave, introHelp } from '../intro';
 const styles = {
   base: {
     marginTop: '10px',
+    marginBottom: '10px',
   },
   button: {
     marginRight: '10px',

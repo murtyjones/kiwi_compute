@@ -8,7 +8,8 @@ import React from 'react';
 import skulpt from 'skulpt';
 import { Row, Col } from 'react-grid-system';
 import { introJs } from 'intro.js';
-import 'intro.js/introjs.css'
+import 'intro.js/introjs.css';
+import 'intro.js/themes/introjs-flattener.css';
 
 import EditorControls from '../Components/EditorControls';
 import ErrorMessage from '../Components/ErrorMessage';
@@ -84,9 +85,6 @@ class CodeEditor extends React.Component {
               runIntro={this.runIntro}
             />
           </Col>
-          <Col md={12}>
-            <ErrorMessage errorMsg={errorMsg} />
-          </Col>
           <Col md={6}>
             <InputArea
               editorInput={editorInput}
@@ -97,6 +95,7 @@ class CodeEditor extends React.Component {
           <Col md={6}>
             <OutputArea
               editorOutput={editorOutput}
+              errorMsg={errorMsg}
             />
           </Col>
         </Row>

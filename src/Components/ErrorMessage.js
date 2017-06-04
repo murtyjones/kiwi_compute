@@ -8,29 +8,24 @@ import React from 'react';
 import { Card, CardHeader } from 'material-ui/Card';
 
 const styles = {
-  card: {
+  base: {
     backgroundColor: '#F44336',
-    marginTop: '10px',
-    marginBottom: '10px',
+    minHeight: '600px',
   },
 };
 
 function ErrorMessage (props) {
   const { errorMsg } = props;
   return (
-    errorMsg ? (
-      <Card style={styles.card}>
-        <CardHeader
-          title="ERROR:"
-          subtitle={errorMsg}
-          actAsExpander={true}
-          titleColor={'white'}
-          subtitleColor={'white'}
-        />
-      </Card>
-    ) : (
-      <p></p>
-    )
+    <Card style={styles.base}>
+      <CardHeader
+        title="ERROR:"
+        subtitle={errorMsg}
+        actAsExpander={true}
+        titleColor={'white'}
+        subtitleColor={'white'}
+      />
+    </Card>
   )
 }
 

@@ -9,6 +9,7 @@ import CodeMirror from 'react-codemirror';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/mode/python/python';
 import '../assets/css/codeMirrorOverrides.css';
+import { Card } from 'material-ui';
 
 import { introEditorInput } from '../intro';
 
@@ -30,7 +31,7 @@ class InputArea extends React.Component {
   render() {
     const { editorInput, updateInput } = this.props;
     return (
-      <div
+      <Card
         data-intro={introEditorInput}
         data-step={1}
       >
@@ -40,7 +41,7 @@ class InputArea extends React.Component {
           onChange={updateInput}
           options={options}
         />
-      </div>
+      </Card>
     )
   }
 }
