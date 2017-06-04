@@ -15,15 +15,27 @@ const options = {
   mode: 'python',
 };
 
-function InputArea (props) {
-  const { editorInput, updateInput } = props;
-  return (
-    <CodeMirror
-      value={editorInput}
-      onChange={updateInput}
-      options={options}
-    />
-  )
+class InputArea extends React.Component {
+  componentWillReceiveProps() {
+    if (this.props.errorLine > -1) {
+      // TODO add highlighting to line with error
+      // this.refs.editor.codeMirror.addLineClass(this.props.errorLine, 'wrap', 'some-class');
+    } else {
+      // TODO clear error highlighting
+    }
+  }
+
+  render() {
+    const { editorInput, updateInput } = this.props;
+    return (
+      <CodeMirror
+        ref="editor"
+        value={editorInput}
+        onChange={updateInput}
+        options={options}
+      />
+    )
+  }
 }
 
 export default InputArea;
