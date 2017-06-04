@@ -9,7 +9,7 @@ import { Card, CardHeader } from 'material-ui/Card';
 
 const styles = {
   base: {
-    backgroundColor: '#F44336',
+    backgroundColor: '#ff816e',
     minHeight: '600px',
   },
 };

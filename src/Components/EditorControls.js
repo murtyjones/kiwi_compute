@@ -6,7 +6,6 @@
 
 import React, { Component } from 'react';
 import Button from './Button';
-import ActionAndroid from 'material-ui/svg-icons/action/android';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import renderIf from 'render-if';
@@ -193,7 +192,6 @@ class EditorControls extends Component {
       <Button
         label={'Start Program'}
         style={styles.button}
-        icon={<ActionAndroid />}
         onClick={this.props.runCode}
         dataIntro={introStart}
         dataStep={2}
@@ -304,6 +302,7 @@ class EditorControls extends Component {
         label={"Basic Tips"}
         style={styles.button}
         onClick={this.props.showResources}
+        secondary={true}
         dataIntro={introResources}
         dataStep={5}
       />
