@@ -1,4 +1,5 @@
 [![N|Solid](https://static.wixstatic.com/media/952bc1_266cdba81e4b42cda66e9d274445bd00~mv2_d_3600_1584_s_2.png/v1/fill/w_626,h_284,al_c,usm_0.66_1.00_0.01/952bc1_266cdba81e4b42cda66e9d274445bd00~mv2_d_3600_1584_s_2.png)](https://nodesource.com/products/nsolid)
+[](https://files.slack.com/files-tmb/T04RN6ZV2-F5MP8C29W-525f316287/screen_shot_2017-06-04_at_1.53.48_pm_1024.png)
 
 # Middle School Online
    [Kiwi Compute](https://www.kiwicompute.com/about-1)
