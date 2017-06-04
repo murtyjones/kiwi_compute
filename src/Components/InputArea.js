@@ -7,7 +7,7 @@
 import React from 'react';
 import CodeMirror from 'react-codemirror';
 import 'codemirror/lib/codemirror.css';
-import 'codemirror/mode/javascript/javascript';
+import 'codemirror/mode/python/python';
 import 'codemirror/addon/hint/show-hint';
 import 'codemirror/addon/hint/javascript-hint';
 import 'codemirror/addon/hint/show-hint.css';
@@ -33,7 +33,7 @@ class InputArea extends React.Component {
     const orig = codeMirror.hint.javascript;
     codeMirror.hint.javascript = function(cm) {
       const inner = orig(cm) || {from: cm.getCursor(), to: cm.getCursor(), list: []};
-      inner.list = [ "bozo", "foo", "bar" ];
+      inner.list = [ "print", "def", "class" ];
       return inner;
     };
     codeMirror.showHint(cm, orig);
@@ -43,7 +43,7 @@ class InputArea extends React.Component {
     const options = {
       lineNumbers: true,
       lineWrapping: true,
-      mode: 'text/x-javascript',
+      mode: 'text/x-python',
       extraKeys: {
         'Ctrl-Space': this.autoComplete
       }
