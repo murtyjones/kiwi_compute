@@ -8,7 +8,7 @@ import React from 'react';
 import Button from './Button';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
 
-import { introStart, introSave, introHelp } from '../intro';
+import { introStart, introSave, introDemo, introResources } from '../intro';
 
 const styles = {
   base: {
@@ -21,7 +21,7 @@ const styles = {
 }
 
 function EditorControls(props) {
-  const { runCode, runIntro } = props;
+  const { runCode, runIntro, showResources } = props;
   return (
     <div style={styles.base}>
       <Button
@@ -39,11 +39,18 @@ function EditorControls(props) {
         dataStep={4}
       />
       <Button
-        label={"Tips & Tricks"}
+        label={"DEMO"}
         style={styles.button}
         onClick={runIntro}
-        dataIntro={introHelp}
+        dataIntro={introDemo}
         dataStep={5}
+      />
+      <Button
+        label={"Tips & Tricks"}
+        style={styles.button}
+        onClick={showResources}
+        dataIntro={introResources}
+        dataStep={6}
       />
     </div>
   )
