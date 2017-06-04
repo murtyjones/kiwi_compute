@@ -87,8 +87,11 @@ class App extends Component {
       dropdown: {
         alignItems: 'bottom',
         position: 'absolute',
-        bottom: '20',
+        bottom: '20px',
         right: '0'
+      },
+      title: {
+        marginTop: '10px'
       }
     }
 
@@ -98,11 +101,13 @@ class App extends Component {
           <AppBar
             iconElementLeft={
               <img
-                height='160'
+                height='60'
                 alt='Kiwi Compute logo'
                 src={logoPath}
               />
             }
+            title="Kiwi Compute"
+            titleStyle={styles.title}
           >
             <DropDownMenu
               value={this.state.themeValue}
