@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import CodeEditor from './Layouts/CodeEditor';
+import { Container } from 'react-grid-system';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
@@ -74,9 +75,9 @@ class App extends Component {
               showMenuIconButton={false}
             />
           </div>
-          <div>
+          <Container fluid>
             <CodeEditor />
-          </div>
+          </Container>
           <AppBar showMenuIconButton={false}>
             <DropDownMenu value={this.state.themeValue} onChange={this.handleThemeChange}>
               <MenuItem value={1} primaryText="Kiwi" />

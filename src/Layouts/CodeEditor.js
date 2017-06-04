@@ -34,6 +34,7 @@ class CodeEditor extends React.Component {
 
   builtinRead = (x) => {
     if (skulpt.builtinFiles === undefined || skulpt.builtinFiles["files"][x] === undefined)
+      // eslint-disable-next-line
       throw "File not found: '" + x + "'";
     return skulpt.builtinFiles["files"][x];
   }
@@ -44,6 +45,7 @@ class CodeEditor extends React.Component {
     skulpt.pre = "output";
     skulpt.configure({output:this.codeRunSuccess, read:this.builtinRead});
     try {
+      // eslint-disable-next-line
       eval(skulpt.importMainWithBody("<stdin>", false, programToRun));
     }
     catch(e) {
