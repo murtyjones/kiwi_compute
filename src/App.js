@@ -91,7 +91,21 @@ class App extends Component {
         right: '0'
       },
       title: {
-        marginTop: '10px'
+        lineHeight: 'none'
+      },
+      titleKiwi: {
+        margin: '0px',
+        padding: '0px',
+        marginTop: '8px',
+        letterSpacing: '3.8px',
+        fontSize: '1.4em'
+      },
+      titleCompute: {
+        margin: '0px',
+        marginTop: '-4px',
+        padding: '0px',
+        fontSize: '.7em',
+        letterSpacing: '.4px'
       }
     }
 
@@ -106,7 +120,12 @@ class App extends Component {
                 src={logoPath}
               />
             }
-            title="Kiwi Compute"
+            title={
+              <div>
+                <div style={styles.titleKiwi}>kiwi</div>
+                <div style={styles.titleCompute}>compute</div>
+              </div>
+            }
             titleStyle={styles.title}
           >
             <DropDownMenu
